@@ -2,3 +2,12 @@
   font-family: sans-serif;
   text-align: center;
 }
+p {
+  color: red;
+  margin-left: 164px;
+  font-size: x-small;
+}
+.MuiFormControl-root {
+  height: 20px;
+  border-radius: 10px;
+}
