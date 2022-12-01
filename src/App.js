@@ -1,8 +1,8 @@
 import "./styles.css";
 import React, { useEffect } from "react";
 
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 export default function App() {
@@ -20,7 +20,7 @@ export default function App() {
   };
   const validateFormData = (values) => {
     const errors = {};
-    console.log("validate : ", values.userName);
+    console.log("validate : ", values);
     if (!values.userName) {
       errors.userName = "User Name is Required";
     } else errors.userName = " ";
@@ -35,7 +35,10 @@ export default function App() {
     }
     if (!values.password) {
       errors.password = "Password is Required";
-    }
+    } else if (values.password.length < 4 || values.password.length > 10) {
+      errors.password =
+        "Password should conatain minimum 4 values Maximum 10 values";
+    } else errors.password = "";
     return errors;
   };
   useEffect(() => {}, [formValues]);
@@ -45,7 +48,7 @@ export default function App() {
         <Box
           component="form"
           sx={{
-            "& .MuiTextField-root": { m: 1, width: "25ch", mx: 20 }
+            "& .MuiTextField-root": { m: 1, width: "25ch", mx: 20 },
           }}
           noValidate
           autoComplete="off"
@@ -56,8 +59,7 @@ export default function App() {
               required
               id="outlined-required"
               label="User Name"
-              name={formValues.userName}
-              defaultValue="User Name"
+              name="userName"
               onChange={handleChange}
             />
             <p>{formError.userName}</p>
@@ -65,20 +67,18 @@ export default function App() {
             <TextField
               required
               id="outlined-required"
-              name={formValues.email}
+              name="email"
               label="Email"
-              defaultValue="Email"
-              onchange={handleChange}
+              onChange={handleChange}
             />
             <p>{formError.email}</p>
             <TextField
               required
               type="password"
-              Name={formValues.password}
+              name="password"
               id="outlined-required"
               label="Password"
-              defaultValue="Password"
-              onchange={handleChange}
+              onChange={handleChange}
             />
             <p>{formError.password}</p>
 
